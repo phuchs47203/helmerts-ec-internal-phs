@@ -1,0 +1,189 @@
+.app-helmerts-signin {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+}
+
+.app-helmerts-signin-box {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    justify-content: center;
+    height: 100%;
+    grid-gap: 1.5rem;
+    min-width: 250px;
+    padding: 1rem;
+    background-color: var(--color-bg);
+    border-radius: 0.3rem;
+}
+
+.app-helmerts-signin-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    grid-gap: 2rem;
+}
+
+.app-helmerts-signin-heading-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.app-helmerts-signin-heading-logo img {
+    width: 100%;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+.app-helmerts-signin-heading h1 {
+    font-family: var(--font-family);
+    color: var(--color-h);
+    text-transform: capitalize;
+    font-size: 26px;
+    text-align: center;
+}
+
+.app-helmerts-signin-content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.app-helmerts-signin-content-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    grid-gap: 1.5rem;
+}
+
+.app-helmerts-signin-content-input-email {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-signin-content-input-password {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    grid-gap: 0.5rem;
+}
+
+.app-helmerts-signin-content-input-password-forgot {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.app-helmerts-signin-content-input-password-forgot p {
+    font-family: var(--font-family);
+    color: var(--color-p);
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.app-helmerts-signin-content-input-password-forgot p:hover {
+    color: var(--color-h);
+    font-weight: 500;
+
+}
+
+.app-helmerts-signin-content-success,
+.app-helmerts-signin-content-error {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.app-helmerts-signin-content-success p,
+.app-helmerts-signin-content-error p {
+    font-family: var(--font-family);
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    color: rgb(32, 168, 32);
+}
+
+.app-helmerts-signin-content-error p {
+    color: var(--color-h);
+
+}
+
+.app-helmerts-signin-content-btn {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+
+.app-helmerts-signin-content-signup {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-signin-content-signup p {
+    font-family: var(--font-family);
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 400;
+    color: var(--color-p);
+    text-align: center;
+}
+
+.signup_link {
+    font-family: var(--font-family);
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgb(172, 75, 19);
+
+    border-bottom: 0.5px solid rgb(172, 75, 19);
+}
+
+.signup_link:hover {
+    color: rgb(34, 133, 163);
+    border-bottom: none;
+}
+
+@media screen and (max-width: 600px) {
+
+    .app-helmerts-signin-heading-logo img {
+        width: 100%;
+        max-height: 60px;
+        object-fit: contain;
+    }
+
+    .app-helmerts-signin-heading h1 {
+        font-size: 20px;
+    }
+
+}

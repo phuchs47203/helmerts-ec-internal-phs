@@ -1,0 +1,143 @@
+.app-helmerts-home-error {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 0.5rem;
+    z-index: 21;
+}
+
+.app-helmerts-home-error-fixed {
+    font-family: var(--font-family);
+    font-size: 24px;
+    color: var(--color-h);
+    margin-top: 3rem;
+
+    text-align: center;
+    padding: 1rem;
+    /* margin-bottom: -2rem; */
+    text-transform: capitalize;
+    letter-spacing: 0.1rem;
+}
+
+.app-helmerts-home-error-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.app-helmerts-home-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.app-helmerts-home-main-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    grid-gap: 2rem;
+    padding: 1rem;
+    align-items: center;
+    z-index: 2;
+}
+
+.app-helmerts-home-main-heading {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 0.5rem;
+    max-width: 1300px;
+}
+
+.app-helmerts-home-main-heading h1 {
+    font-family: var(--font-family);
+    color: #444;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0.04rem;
+    text-transform: uppercase;
+    color: var(--color-h);
+}
+
+.app-helmerts-home-main-heading p {
+    color: var(--color-p);
+    font-size: 14px;
+    word-spacing: -0.2rem;
+    letter-spacing: -0.04rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+.alert_violate {
+    color: var(--pink);
+    font-weight: 500;
+}
+
+.app-helmerts-home-main-box-waiting {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid red;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0%;
+}
+
+.app-helmerts-home-main-box-waiting p {
+    color: rgb(25, 150, 25);
+    font-family: var(--font-family);
+    font-size: 16px;
+    /* animation: colorChange 2s linear infinite; */
+
+}
+
+
+
+.app-helmerts-home-main-content {
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
+    grid-gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 1300px;
+}
+
+@media screen and (max-width: 990px) {
+    .app-helmerts-home-main-content {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .app-helmerts-home-error-fixed {
+        font-size: 20px;
+        margin-top: 3rem;
+    }
+}

@@ -1,0 +1,44 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap');
+
+:root {
+  /* --font-family: 'Poppins', sans-serif; */
+  --font-family: 'Roboto Mono', monospace;
+  --font-family2: 'Kalam', cursive;
+  --font-family3: 'Montserrat', sans-serif;
+  --gradient-text: radial-gradient(ellipse at 52% 100%, rgba(237, 82, 153, 1) 0%, rgba(233, 100, 38, 1) 100%);
+  --gradient-bg: linear-gradient(90deg, rgba(193, 77, 42, 1) 0%, rgba(153, 73, 197, 1) 100%);
+  --gradient-bg-cta: linear-gradient(180deg, rgba(253, 214, 194, 1) 0%, rgba(230, 230, 196, 1) 100%);
+
+  --primary-color: #ffffff;
+  --secondary-color: #313bac;
+  --black-color: #030303;
+  --lightGray-color: #e4e4e4;
+  --gray-color: #6b7688;
+  --brown-color: #46364a;
+  --white-color: #ffffff;
+  --color-bg: #f6f1eb;
+  --color-bg-box: #fffcf7;
+  --color-p: rgb(96, 49, 34);
+  --color-link: #f6f1eb;
+  --pink: rgb(177, 38, 108);
+  --color-h: rgb(220, 63, 20);
+  --color-h1: rgb(11, 46, 101);
+  --color-footer: #3c3d45;
+  --color-legal: rgb(250, 252, 241);
+  --color-icon: rgb(96, 49, 34);
+  --color-icon2: rgb(211, 238, 216);
+  --color-icon3: rgb(141, 86, 59);
+
+  --liner-color: linear-gradient(90deg, rgba(160, 51, 19, 1) 0%, rgba(247, 210, 181, 1) 100%);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}

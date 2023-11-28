@@ -1,0 +1,221 @@
+.app-helmerts-navbar {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    padding: 0.5rem 10rem;
+    background-color: var(--color-bg);
+    z-index: 20;
+}
+
+.app-helmerts-navbar-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.app-helmerts-navbar-logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.app-helmerts-navbar-content {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.app-helmerts-navbar-content-link {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-link {
+    font-family: var(--font-family);
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--color-p);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.menu-link:hover {
+    color: var(--color-h);
+    font-weight: 500;
+}
+
+
+.menu-link_button-account {
+    border: none;
+    background-color: transparent;
+    font-family: var(--font-family);
+    cursor: pointer;
+    color: var(--color-p);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.menu-link_button-account:hover {
+    color: var(--color-h);
+    font-weight: 500;
+}
+
+
+.app-helmerts-navbar-content-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.app-helmerts-navbar-content-menu-svg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-navbar-content-menu svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-icon);
+    cursor: pointer;
+}
+
+.app-helmerts-navbar-content-menu-link {
+    top: 0;
+    right: 0;
+    width: 100vw;
+    position: fixed;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+    scroll-behavior: smooth;
+    overflow-y: auto;
+    justify-content: flex-start;
+    align-items: flex-end;
+    z-index: 20;
+}
+
+.app-helmerts-navbar-content-menu-link-content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 2rem;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.app-helmerts-navbar-content-personal_information {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 4rem;
+    bottom: 0;
+    right: 0;
+    z-index: 15;
+    background-color: var(--color-bg);
+}
+
+
+
+.app-helmerts-navbar-content-personal_information-back {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.5rem 2rem;
+    padding-left: 10rem;
+    z-index: 99;
+    /* padding-top: 4rem; */
+}
+
+.app-helmerts-navbar-content-personal_information-back-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    grid-gap: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    padding-left: 0rem;
+}
+
+.svg_back {
+    color: var(--color-p);
+    width: 25px;
+    height: 25px;
+}
+
+.back_ {
+    color: var(--color-p);
+    font-size: 18px;
+}
+
+.app-helmerts-navbar-content-personal_information-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    margin-bottom: 4rem;
+}
+
+.app-helmerts-navbar-content-personal_information-content::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 1600px) {
+    .app-helmerts-navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .app-helmerts-navbar-content-personal_information-back {
+        padding-left: 1rem;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .app-helmerts-navbar-content-menu {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .app-helmerts-navbar-content-link {
+        display: none;
+    }
+
+    .app-helmerts-navbar-logo img {
+        height: 40px;
+    }
+
+    .menu-link {
+        font-size: 14px;
+    }
+
+    .app-helmerts-navbar-content-personal_information{
+        top: 3rem;
+    }
+}

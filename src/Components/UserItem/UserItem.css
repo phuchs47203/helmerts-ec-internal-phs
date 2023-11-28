@@ -1,0 +1,194 @@
+.app-helmerts-internal-user_item-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+}
+
+.app-helmerts-internal-user_item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.4rem;
+    background-color: var(--color-legal);
+    padding: 0.5rem;
+}
+
+.app-helmerts-internal-user_item-update {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0rem;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    background-color: var(--color-bg);
+}
+
+.app-helmerts-internal-user_item-update-back {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0.5rem 2rem;
+    padding-left: 10rem;
+    z-index: 15;
+    padding-top: 4rem;
+
+}
+
+.app-helmerts-internal-user_item-update-back-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    grid-gap: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    padding-left: 0rem;
+}
+
+.svg_back {
+    color: var(--color-p);
+    width: 25px;
+    height: 25px;
+}
+
+.back_ {
+    color: var(--color-p);
+    font-size: 18px;
+}
+
+.app-helmerts-internal-user_item-update-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+
+}
+
+.app-helmerts-internal-user_item-update-content::-webkit-scrollbar {
+    display: none;
+}
+
+.app-helmerts-internal-user_item-content {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    width: 100%;
+    height: 100%;
+    grid-gap: 0.5rem;
+    flex: 1;
+}
+
+.app-helmerts-internal-user_item-content-img {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.app-helmerts-internal-user_item-content-img img {
+    width: 100px;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.app-helmerts-internal-user_item-content-information {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    grid-gap: 0.2rem;
+}
+
+.app-helmerts-internal-user_item-content-information h3 {
+    color: #444;
+    text-transform: capitalize;
+    font-family: var(--font-family);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.app-helmerts-internal-user_item-content-information p {
+    color: var(--color-p);
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.app-helmerts-internal-user_item-button {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    grid-gap: 1rem;
+}
+
+@media screen and (max-width:1600px) {
+    .app-helmerts-internal-user_item-update-back {
+        padding-left: 1rem;
+    }
+}
+
+@media screen and (max-width: 990px) {
+
+    .app-helmerts-internal-user_item-content-img img {
+        width: 80px;
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+    .app-helmerts-internal-user_item-content-img img {
+        width: 60px;
+        border-radius: 0%;
+    }
+
+    .app-helmerts-internal-user_item-content-information h3 {
+        color: #444;
+        text-transform: capitalize;
+        font-family: var(--font-family);
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    .app-helmerts-internal-user_item-content-information p {
+        font-size: 12px;
+    }
+
+    .app-helmerts-internal-user_item-button {
+
+        grid-gap: 0.5rem;
+    }
+
+    .app-helmerts-internal-user_item-update-back-button {
+        grid-gap: 0.5rem;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        padding-left: 0rem;
+    }
+
+    .svg_back {
+        color: var(--color-p);
+        width: 20px;
+        height: 20px;
+    }
+
+    .back_ {
+        color: var(--color-p);
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,92 @@
+.app-helmerts-shipper-error {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    justify-content: flex-start;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    padding: 0.5rem;
+    z-index: 3;
+}
+
+.app-helmerts-shipper-error-fixed {
+    font-family: var(--font-family);
+    font-size: 24px;
+    color: var(--color-h);
+    margin-top: 3rem;
+
+    text-align: center;
+    padding: 1rem;
+    /* margin-bottom: -2rem; */
+    text-transform: capitalize;
+    letter-spacing: 0.1rem;
+}
+
+.app-helmerts-shipper-error-login {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.app-helmerts-shipper-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.app-helmerts-shipper-main-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    grid-gap: 2rem;
+    padding: 1rem;
+    align-items: center;
+    z-index: 2;
+}
+
+.app-helmerts-shipper-main-heading {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.app-helmerts-shipper-main-content {
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    height: 100%;
+    grid-gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 1300px;
+}
+
+@media screen and (max-width: 990px) {
+    .app-helmerts-shipper-main-content {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .app-helmerts-shipper-error-fixed {
+        font-size: 20px;
+        margin-top: 3rem;
+    }
+}

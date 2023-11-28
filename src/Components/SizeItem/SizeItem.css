@@ -1,0 +1,76 @@
+.app-helmert-product_size {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    grid-gap: 1rem;
+}
+
+.app-helmert-product_size-left {
+    width: 100%;
+    display: grid;
+    justify-content: flex-start;
+    align-items: center;
+    grid-gap: 0.5rem;
+    grid-template-columns: 1fr 10fr;
+}
+
+.app-helmert-product_size-left-name {
+    display: flex;
+    flex-direction: row;
+    width: 50px;
+}
+
+.app-helmert-product_size-left-name h3 {
+    color: #444;
+    font-family: var(--font-family3);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.app-helmert-product_size-left-input {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    grid-gap: 1rem;
+    justify-content: flex-start;
+}
+
+.app-helmert-product_size-left-input-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.app-helmert-product_size-left-input-item p {
+    font-family: var(--font-family);
+    font-size: 12px;
+    color: #444;
+}
+
+.app-helmert-product_size-right {
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0.2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmert-product_size-right p {
+    color: rgb(30, 153, 30);
+    font-size: 12px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.app-helmert-product_size-right h6 {
+    color: var(--color-h);
+    font-size: 12px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    white-space: nowrap;
+}
