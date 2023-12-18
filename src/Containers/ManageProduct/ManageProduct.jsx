@@ -12,6 +12,8 @@ const ManageProduct = () => {
     const [accessToken, setaccessToken] = useState(null);
     const [expire_at, setexpire_at] = useState(null);
     const [waiting, setwaiting] = useState(false);
+    const [localToken, setlocalToken] = useState(null);
+
     const isTokenValid = () => {
         const storedAccessToken = localStorage.getItem('accessToken');
         if (storedAccessToken) {
@@ -19,6 +21,7 @@ const ManageProduct = () => {
             const expirationTime = new Date(parsedAccessToken.expiration_time);
             setuserInfor(parsedAccessToken.user);
             setaccessToken(parsedAccessToken.token);
+            setlocalToken(parsedAccessToken);
             setwaiting(true);
             // console.log(parsedAccessToken.user.role);
             return Date.now() < expirationTime
@@ -34,11 +37,11 @@ const ManageProduct = () => {
             axios.get(URL_REQUEST_PRODUCT, {
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: `Bearer ${localToken.token}`
                 }
             })
                 .then(response => {
-                    // console.log(response.data);
+                    console.log(response.data);
                     setlistProduct(response.data);
                     setwaiting(false);
                 })

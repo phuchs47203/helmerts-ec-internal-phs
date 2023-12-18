@@ -17,6 +17,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
+
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
     clipPath: 'inset(50%)',
@@ -28,9 +29,7 @@ const VisuallyHiddenInput = styled('input')({
     whiteSpace: 'nowrap',
     width: 1,
 });
-
-const UpdatePersonalInformation = ({ User_Details }) => {
-    const URL_REQUEST = "http://localhost:8000/api/register";
+const UpdatePersonalInformation = ({ User_Details, localToken }) => {
     const defaultProps = {
         options: top7OptionTitle,
         getOptionLabel: (option) => option.name,
@@ -45,19 +44,19 @@ const UpdatePersonalInformation = ({ User_Details }) => {
     const navigate = useNavigate();
     const [valueEmail, setValueEmail] = useState(User_Details.email);
     const [valuePassword, setValuePassword] = useState(null);
-    const [valueTitle, setValueTitle] = useState(null);
-    const [valueCountry, setValueCountry] = useState(null);
-    const [firstName, setfirstName] = useState('');
-    const [lastName, setlastName] = useState('');
-    const [phoneNumber, setphoneNumber] = useState(null);
-    const [fileURL, setfileURL] = useState("");
+    const [valueTitle, setValueTitle] = useState(User_Details.title);
+    const [valueCountry, setValueCountry] = useState(User_Details.country);
+    const [firstName, setfirstName] = useState(User_Details.first_name);
+    const [lastName, setlastName] = useState(User_Details.last_name);
+    const [phoneNumber, setphoneNumber] = useState(User_Details.phone_number);
+    const [fileURL, setfileURL] = useState(User_Details.imgurl);
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [dateOfBirth, setdateOfBirth] = useState(null);
-    const [valueDate, setValueDate] = React.useState(dayjs('2000-07-27'));
+    const [valueDate, setValueDate] = React.useState(dayjs(User_Details.dateofbirth));
     // const [valueLocation, setValueLocation] = useState(null);
-    const [valueAddressDetails, setvalueAddressDetails] = useState('');
-    const [valueCity, setvalueCity] = useState('');
-    const [valueDistrict, setvalueDistrict] = useState('');
+    const [valueAddressDetails, setvalueAddressDetails] = useState(User_Details.address_details);
+    const [valueCity, setvalueCity] = useState(User_Details.city);
+    const [valueDistrict, setvalueDistrict] = useState(User_Details.district);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -104,6 +103,9 @@ const UpdatePersonalInformation = ({ User_Details }) => {
     const handleChangePhoneNumber = (event) => {
         setphoneNumber(event.target.value);
     };
+
+
+
     const [errorEmail, seterrorEmail] = useState('');
     const [registerSuccess, setregisterSuccess] = useState('');
     const [pleaseWait, setpleaseWait] = useState('');
@@ -114,15 +116,16 @@ const UpdatePersonalInformation = ({ User_Details }) => {
             const storedAccessToken = localStorage.getItem('accessToken');
             const parsedAccessToken = JSON.parse(storedAccessToken);
             setaccessTokenLogout(parsedAccessToken.token);
+
             console.log("token:", parsedAccessToken.token);
             axios.post(URL_LOGOUT, null, {
                 headers: {
                     Accept: "application/json",
-                    Authorization: `Bearer ${parsedAccessToken.token}`
+                    Authorization: `Bearer ${localToken.token}`
                 }
             })
                 .then(response => {
-                    // console.log(response.data);
+                    console.log(response.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -136,6 +139,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
 
     }
     const saveUser = () => {
+        const URL_REQUEST = "http://localhost:8000/api/users/" + User_Details.id;
         const formData = new FormData();
         setpleaseWait('Please Wait ...!');
         seterrorEmail('');
@@ -145,48 +149,44 @@ const UpdatePersonalInformation = ({ User_Details }) => {
         formData.append('first_name', firstName);
         formData.append('last_name', lastName);
         formData.append('email', valueEmail);
-        formData.append('password', valuePassword);
+        formData.append('title', valueTitle);
         formData.append('phone_number', phoneNumber);
-        formData.append('country', valueCountry.country);
+        formData.append('country', valueCountry);
         formData.append('city', valueCity);
         formData.append('district', valueDistrict);
         formData.append('address_details', valueAddressDetails);
-        formData.append('imgurl', selectedFile);
+        if (selectedFile) {
+            formData.append('imgurl', selectedFile);
+        }
         formData.append('dateofbirth', formattedDate);
-        formData.append('password_confirmation', valuePassword);
-
+        if (valuePassword) {
+            formData.append('password', valuePassword);
+            formData.append('password_confirmation', valuePassword);
+        }
         // for (const [key, value] of formData.entries()) {
-        //   console.log(key, value);
+        //     console.log(key, value);
         // }
-
         axios
             .post(URL_REQUEST, formData,
                 {
-                    headers: { Accept: "application/json" },
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${localToken.token}`
+                    }
                 })
             .then((response) => {
-                // console.log(response.data);
-                const { token, user } = response.data;
-                // console.log(user.role);
-                // console.log(token);
-                const accessToken = {
-                    token: token,
-                    expiration_time: new Date(new Date().getTime() + 30 * 60 * 1000), // Thời gian hết hạn sau 30 phút
-                    user: user
-                }
-                Loggout();
-                localStorage.setItem('accessToken', JSON.stringify(accessToken));
-                setregisterSuccess('Register Successfully!');
-                setTimeout(() => {
-                    navigate(`/account`);
-                }, 1500);
+                console.log(response.data);
+                setregisterSuccess('Update Successfully! Logout To Refresh Information');
+                // Loggout();
+                // setTimeout(() => {
+                //     window.location.reload();
+                // }, 1500);
             })
             .catch((error) => {
                 console.log(error);
                 seterrorEmail('The Email Address Already Been Taken!');
-
+                setregisterSuccess('');
             });
-        const storedAccessToken = localStorage.getItem('accessToken');
     };
     useEffect(() => {
         seterrorEmail('');
@@ -197,9 +197,9 @@ const UpdatePersonalInformation = ({ User_Details }) => {
         setpleaseWait('');
     }, [errorEmail]);
     return (
-        <div id='signup' className='app-helmerts-signup-box'>
-            <div className='app-helmerts-signup'>
-                <div className='app-helmerts-signup-heading'>
+        <div id='signup' className='app-helmerts-internal-update-box'>
+            <div className='app-helmerts-internal-update'>
+                <div className='app-helmerts-internal-update-heading'>
                     <h1>Your personal information</h1>
                     <p>
                         By updating your account, you agree to accept the&nbsp;
@@ -213,11 +213,11 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                         &nbsp;of Helmerts.
                     </p>
                 </div>
-                <div className='app-helmerts-signup-content'>
-                    <div className='app-helmerts-signup-content-attribute'>
-                        <div className='app-helmerts-signup-content-attribute-left'>
-                            <div className='app-helmerts-signup-content-attribute-left-login_information'>
-                                <div className='app-helmerts-signup-content-attribute-left-login_information-title'>
+                <div className='app-helmerts-internal-update-content'>
+                    <div className='app-helmerts-internal-update-content-attribute'>
+                        <div className='app-helmerts-internal-update-content-attribute-left'>
+                            <div className='app-helmerts-internal-update-content-attribute-left-login_information'>
+                                <div className='app-helmerts-internal-update-content-attribute-left-login_information-title'>
                                     <h1>
                                         LOGIN INFORMATION
                                     </h1>
@@ -225,9 +225,9 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                         * Required information
                                     </p>
                                 </div>
-                                <div className='app-helmerts-signup-content-attribute-left-login_information-content'>
-                                    <div className='app-helmerts-signup-content-attribute-left-login_information-content-email'>
-                                        <div className='app-helmerts-signup-content-attribute-left-login_information-content-email-input'>
+                                <div className='app-helmerts-internal-update-content-attribute-left-login_information-content'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-email'>
+                                        <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-email-input'>
 
                                             <TextField
                                                 required
@@ -273,12 +273,12 @@ const UpdatePersonalInformation = ({ User_Details }) => {
 
                                         </div>
                                     </div>
-                                    <div className='app-helmerts-signup-content-attribute-left-login_information-content-password'>
-                                        <div className='app-helmerts-signup-content-attribute-left-login_information-content-password-input'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-password'>
+                                        <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-password-input'>
                                             <TextField
                                                 required
                                                 id="outlined-password-input"
-                                                label="Password"
+                                                label="New Password"
                                                 type="password"
                                                 autoComplete="current-password"
                                                 value={valuePassword}
@@ -294,13 +294,13 @@ const UpdatePersonalInformation = ({ User_Details }) => {
 
                                             />
                                         </div>
-                                        <div className='app-helmerts-signup-content-attribute-left-login_information-content-password-alert'>
-                                            <div className='app-helmerts-signup-content-attribute-left-login_information-content-password-alert-title'>
+                                        <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert'>
+                                            <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-title'>
                                                 <p>
                                                     For your security, we invite you to fill your password according to the following criteria:
                                                 </p>
                                             </div>
-                                            <div className='app-helmerts-signup-content-attribute-left-login_information-content-password-alert-list'>
+                                            <div className='app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-list'>
                                                 <p>
                                                     At least 10 characters
                                                 </p>
@@ -321,21 +321,21 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='app-helmerts-signup-content-attribute-left-personal_information'>
-                                <div className='app-helmerts-signup-content-attribute-left-personal_information-title'>
+                            <div className='app-helmerts-internal-update-content-attribute-left-personal_information'>
+                                <div className='app-helmerts-internal-update-content-attribute-left-personal_information-title'>
                                     <h1>
                                         PERSONAL INFORMATION
                                     </h1>
                                 </div>
-                                <div className='app-helmerts-signup-content-attribute-left-personal_information-content'>
-                                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                                         <Autocomplete
                                             {...defaultProps}
                                             id="disable-clearable"
                                             disableClearable
-                                            value={valueTitle}
+                                            value={{ name: valueTitle }}
                                             onChange={(event, newValue) => {
-                                                setValueTitle(newValue);
+                                                setValueTitle(newValue ? newValue.name : User_Details.title);
                                             }}
                                             style={commonTextFieldStyle}
                                             InputLabelProps={{
@@ -355,7 +355,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                             )}
                                         />
                                     </div>
-                                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                                         <TextField
                                             required
                                             id="name"
@@ -377,7 +377,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                         />
 
                                     </div>
-                                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
 
                                         <TextField
                                             required
@@ -398,7 +398,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                             }}
                                         />
                                     </div>
-                                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                                         <Button component="label"
                                             variant="contained"
 
@@ -419,13 +419,13 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                             />
                                         </Button>
                                         {fileURL && (
-                                            <img src={fileURL} className='imge-style' alt="no image" />
+                                            <img src={fileURL} className='imge-style-update' alt="no image" />
                                         )
 
                                         }
 
                                     </div>
-                                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                                         <PhoneInput
                                             className="phone_style"
                                             value={phoneNumber}
@@ -451,7 +451,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                             }}
                                         />
                                     </div>
-                                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                             <DemoContainer
                                                 components={['DatePicker', 'DatePicker']}>
@@ -463,28 +463,28 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                             </DemoContainer>
                                         </LocalizationProvider>
                                     </div>
-                                    {/* <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                                    {/* <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                     </div>
-                    <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
+                    <div className='app-helmerts-internal-update-content-attribute-left-personal_information-content-item'>
                     </div> */}
                                 </div>
                             </div>
                         </div>
-                        <div className='app-helmerts-signup-content-attribute-right-billing_information'>
-                            <div className='app-helmerts-signup-content-attribute-right-billing_information-title'>
+                        <div className='app-helmerts-internal-update-content-attribute-right-billing_information'>
+                            <div className='app-helmerts-internal-update-content-attribute-right-billing_information-title'>
                                 <h1>
                                     BILLING INFORMATION
                                 </h1>
                             </div>
-                            <div className='app-helmerts-signup-content-attribute-right-billing_information-content'>
-                                <div className='app-helmerts-signup-content-attribute-right-billing_information-content-item'>
+                            <div className='app-helmerts-internal-update-content-attribute-right-billing_information-content'>
+                                <div className='app-helmerts-internal-update-content-attribute-right-billing_information-content-item'>
                                     <Autocomplete
                                         {...defaultPropsCountry}
                                         id="disable-clearable"
                                         disableClearable
-                                        value={valueCountry}
+                                        value={{ country: valueCountry }}
                                         onChange={(event, newValue) => {
-                                            setValueCountry(newValue);
+                                            setValueCountry(newValue ? newValue.country : User_Details.country);
                                         }}
                                         style={commonTextFieldStyle}
                                         InputLabelProps={{
@@ -500,7 +500,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                     />
                                 </div>
 
-                                <div className='app-helmerts-signup-content-attribute-right-billing_information-content-item'>
+                                <div className='app-helmerts-internal-update-content-attribute-right-billing_information-content-item'>
                                     <TextField
                                         required
                                         id="city"
@@ -521,7 +521,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                         }}
                                     />
                                 </div>
-                                <div className='app-helmerts-signup-content-attribute-right-billing_information-content-item'>
+                                <div className='app-helmerts-internal-update-content-attribute-right-billing_information-content-item'>
                                     <TextField
                                         required
                                         id="district"
@@ -542,7 +542,7 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                         }}
                                     />
                                 </div>
-                                <div className='app-helmerts-signup-content-attribute-right-billing_information-content-item'>
+                                <div className='app-helmerts-internal-update-content-attribute-right-billing_information-content-item'>
                                     <TextField
                                         required
                                         id="address"
@@ -563,18 +563,18 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                                         }}
                                     />
                                 </div>
-                                {/* <div className='app-helmerts-signup-content-attribute-right-billing_information-content-item'>
+                                {/* <div className='app-helmerts-internal-update-content-attribute-right-billing_information-content-item'>
                   </div> */}
                             </div>
                         </div>
                     </div>
-                    <div className='app-helmerts-signup-content-confirm'>
+                    <div className='app-helmerts-internal-update-content-confirm'>
                         <div className='line_' />
-                        <div className='app-helmerts-signup-content-confirm-content'>
-                            <div className='app-helmerts-signup-content-confirm-content-svg'>
+                        <div className='app-helmerts-internal-update-content-confirm-content'>
+                            <div className='app-helmerts-internal-update-content-confirm-content-svg'>
                                 <FormControlLabel control={<Checkbox />} />
                             </div>
-                            <div className='app-helmerts-signup-content-confirm-content-p'>
+                            <div className='app-helmerts-internal-update-content-confirm-content-p'>
                                 <p>
                                     I guarantee compliance with
                                     the&nbsp;<Link to='/information' className='link_'>Privacy Policy</Link>
@@ -583,31 +583,31 @@ const UpdatePersonalInformation = ({ User_Details }) => {
                             </div>
                         </div>
                         {pleaseWait &&
-                            <div className='app-helmerts-signup-content-wait'>
+                            <div className='app-helmerts-internal-update-content-wait'>
                                 <p>
                                     {pleaseWait}
                                 </p>
                             </div>
                         }
                         {errorEmail &&
-                            <div className='app-helmerts-signup-content-error'>
+                            <div className='app-helmerts-internal-update-content-error'>
                                 <p>
                                     {errorEmail}
                                 </p>
                             </div>
                         }
                         {registerSuccess &&
-                            <div className='app-helmerts-signup-content-success'>
+                            <div className='app-helmerts-internal-update-content-success'>
                                 <p>
                                     {registerSuccess}
                                 </p>
                             </div>
                         }
-                        <div className='app-helmerts-signup-content-confirm-button'>
+                        <div className='app-helmerts-internal-update-content-confirm-button'>
                             <button
                                 className='btn-transition'
                                 onClick={saveUser}
-                            >Create an account</button>
+                            >Confirm Update</button>
                         </div>
                     </div>
                 </div>

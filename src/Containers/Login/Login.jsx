@@ -33,17 +33,22 @@ const Login = () => {
                 const { token, user } = response.data;
                 const accessToken = {
                     token: token,
-                    expiration_time: new Date(new Date().getTime() + 60 * 60 * 1000), // Thời gian hết hạn sau 30 phút
+                    expiration_time: new Date(new Date().getTime() + 58 * 60 * 1000), // Thời gian hết hạn sau 30 phút
                     user: user
                 }
-                localStorage.setItem('accessToken', JSON.stringify(accessToken));
-                setloginSuccess('Loggin successfully');
+                if (user.role === 'manager' || user.role === 'admin') {
+                    localStorage.setItem('accessToken', JSON.stringify(accessToken));
 
-                setstoredAccessToken(localStorage.getItem('accessToken'));
-                setTimeout(() => {
-                    navigate(`/home`);
-                    window.location.reload();
-                }, 1000);
+                    setloginSuccess('Loggin successfully');
+
+                    setstoredAccessToken(localStorage.getItem('accessToken'));
+                    setTimeout(() => {
+                        navigate(`/home`);
+                        window.location.reload();
+                    }, 1000);
+                }
+                seterrorEmailOrPassword('The email address or password is incorrect');
+
             })
             .catch((error) => {
                 console.log(error);

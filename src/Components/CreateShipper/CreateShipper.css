@@ -1,35 +1,29 @@
-.app-helmerts-internal-update-box {
+.app-helmerts-create_shipper-box {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    z-index: 999;
-    background-color: var(--color-bg);
+    z-index: 30;
 }
 
-.app-helmerts-internal-update {
+.app-helmerts-create_shipper {
     max-width: 1260px;
     display: flex;
     flex-direction: column;
     grid-gap: 1rem;
     height: 100%;
-    width: 100%;
 }
 
-/* .app-helmerts-signup::-webkit-scrollbar {
-    display: none;
-} */
-.app-helmerts-internal-update-heading {
+.app-helmerts-create_shipper-heading {
     display: flex;
     flex-direction: column;
     grid-gap: 0.5rem;
-
 }
 
-.app-helmerts-internal-update-heading h1 {
+.app-helmerts-create_shipper-heading h1 {
     font-family: var(--font-family);
     color: #444;
     font-weight: 400;
@@ -39,7 +33,7 @@
     text-transform: uppercase;
 }
 
-.app-helmerts-internal-update-heading p {
+.app-helmerts-create_shipper-heading p {
     color: var(--color-p);
     font-size: 14px;
     word-spacing: -0.2rem;
@@ -54,11 +48,7 @@
     letter-spacing: -0.04rem;
 }
 
-.link_:hover {
-    color: var(--color-h);
-}
-
-.app-helmerts-internal-update-content {
+.app-helmerts-create_shipper-content {
     display: flex;
     flex-direction: column;
     grid-gap: 2rem;
@@ -68,7 +58,7 @@
     padding: 1rem;
 }
 
-.app-helmerts-internal-update-content-attribute {
+.app-helmerts-create_shipper-content-attribute {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
@@ -76,7 +66,7 @@
     grid-gap: 1rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left {
+.app-helmerts-create_shipper-content-attribute-left {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -84,7 +74,7 @@
     grid-gap: 2.5rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information {
+.app-helmerts-create_shipper-content-attribute-left-login_information {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -92,7 +82,7 @@
     grid-gap: 1.5rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-title {
+.app-helmerts-create_shipper-content-attribute-left-login_information-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -102,7 +92,7 @@
     flex-wrap: wrap;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-title h1 {
+.app-helmerts-create_shipper-content-attribute-left-login_information-title h1 {
     font-family: var(--font-family);
     color: #444;
     font-weight: 400;
@@ -112,7 +102,7 @@
     text-transform: uppercase;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content {
     display: flex;
     width: 100%;
     height: 100%;
@@ -120,8 +110,8 @@
     grid-gap: 2rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-email,
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-email,
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -131,8 +121,8 @@
     grid-gap: 1rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-email-input,
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password-input {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-email-input,
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password-input {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -162,13 +152,13 @@
     line-height: 20px;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert {
     display: flex;
     flex-direction: column;
     grid-gap: 0.5rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-title {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-title {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -176,7 +166,7 @@
     align-items: flex-start;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-title p {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-title p {
     color: var(--color-p);
     font-size: 14px;
     word-spacing: -0.2rem;
@@ -184,7 +174,7 @@
     font-family: var(--font-family);
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-list {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0.5rem;
@@ -192,7 +182,7 @@
     background-color: var(--color-bg);
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-list p {
+.app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-list p {
     color: var(--color-p);
     font-size: 12px;
     word-spacing: -0.2rem;
@@ -200,7 +190,7 @@
     font-family: var(--font-family);
 }
 
-.app-helmerts-internal-update-content-attribute-left-personal_information {
+.app-helmerts-create_shipper-content-attribute-left-personal_information {
     display: flex;
     width: 100%;
     height: 100%;
@@ -208,14 +198,14 @@
     grid-gap: 1rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-personal_information-title {
+.app-helmerts-create_shipper-content-attribute-left-personal_information-title {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
 }
 
-.app-helmerts-internal-update-content-attribute-left-personal_information-title h1 {
+.app-helmerts-create_shipper-content-attribute-left-personal_information-title h1 {
     font-family: var(--font-family);
     color: #444;
     font-weight: 400;
@@ -225,7 +215,7 @@
     text-transform: uppercase;
 }
 
-.app-helmerts-internal-update-content-attribute-left-personal_information-content {
+.app-helmerts-create_shipper-content-attribute-left-personal_information-content {
     display: flex;
     width: 100%;
     height: 100%;
@@ -233,7 +223,7 @@
     grid-gap: 2rem;
 }
 
-.app-helmerts-internal-update-content-attribute-left-personal_information-content-item {
+.app-helmerts-create_shipper-content-attribute-left-personal_information-content-item {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -244,7 +234,7 @@
 
 
 
-.app-helmerts-internal-update-content-attribute-right-billing_information {
+.app-helmerts-create_shipper-content-attribute-right-billing_information {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -254,7 +244,7 @@
     align-items: flex-start;
 }
 
-.app-helmerts-internal-update-content-attribute-right-billing_information-title {
+.app-helmerts-create_shipper-content-attribute-right-billing_information-title {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -264,7 +254,7 @@
     flex-wrap: wrap;
 }
 
-.app-helmerts-internal-update-content-attribute-right-billing_information-title h1 {
+.app-helmerts-create_shipper-content-attribute-right-billing_information-title h1 {
     font-family: var(--font-family);
     color: #444;
     font-weight: 400;
@@ -274,14 +264,14 @@
     text-transform: uppercase;
 }
 
-.app-helmerts-internal-update-content-attribute-left-login_information-title p {
+.app-helmerts-create_shipper-content-attribute-left-login_information-title p {
     color: var(--color-p);
     font-size: 13px;
     word-spacing: -0.2rem;
     letter-spacing: -0.04rem;
 }
 
-.app-helmerts-internal-update-content-attribute-right-billing_information-content {
+.app-helmerts-create_shipper-content-attribute-right-billing_information-content {
     display: flex;
     width: 100%;
     height: 100%;
@@ -289,19 +279,13 @@
     grid-gap: 2rem;
 }
 
-.app-helmerts-internal-update-content-attribute-right-billing_information-content-item {
+.app-helmerts-create_shipper-content-attribute-right-billing_information-content-item {
     display: flex;
     flex-direction: row;
     width: 100%;
 }
 
-.app-helmerts-signup-content-attribute-right-billing_information-content-item {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.app-helmerts-internal-update-content-confirm {
+.app-helmerts-create_shipper-content-confirm {
     display: flex;
     flex-direction: column;
     grid-gap: 1rem;
@@ -314,7 +298,7 @@
     background-color: var(--color-bg);
 }
 
-.app-helmerts-internal-update-content-confirm-content {
+.app-helmerts-create_shipper-content-confirm-content {
     display: grid;
     grid-template-columns: 1fr 100fr;
     width: 100%;
@@ -322,7 +306,7 @@
     height: 100%;
 }
 
-.app-helmerts-internal-update-content-confirm-content-svg {
+.app-helmerts-create_shipper-content-confirm-content-svg {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -330,21 +314,21 @@
     height: 100%;
 }
 
-.app-helmerts-internal-update-content-confirm-content-svg svg {
+.app-helmerts-create_shipper-content-confirm-content-svg svg {
     color: var(--color-p);
 }
 
-.app-helmerts-internal-update-content-confirm-content-p {
+.app-helmerts-create_shipper-content-confirm-content-p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     height: 100%;
     width: 100%;
     margin-left: -1rem;
 }
 
-.app-helmerts-internal-update-content-confirm-content-p p {
+.app-helmerts-create_shipper-content-confirm-content-p p {
     color: var(--color-p);
     font-size: 14px;
     word-spacing: -0.2rem;
@@ -352,9 +336,9 @@
     font-weight: 400;
 }
 
-.app-helmerts-internal-update-content-error,
-.app-helmerts-internal-update-content-success,
-.app-helmerts-internal-update-content-wait {
+.app-helmerts-create_shipper-content-error,
+.app-helmerts-create_shipper-content-success,
+.app-helmerts-create_shipper-content-wait {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -362,9 +346,9 @@
     width: 100%;
 }
 
-.app-helmerts-internal-update-content-error p,
-.app-helmerts-internal-update-content-success p,
-.app-helmerts-internal-update-content-wait p {
+.app-helmerts-create_shipper-content-error p,
+.app-helmerts-create_shipper-content-success p,
+.app-helmerts-create_shipper-content-wait p {
     font-family: var(--font-family);
     font-size: 13px;
     cursor: pointer;
@@ -372,15 +356,15 @@
     color: rgb(32, 168, 32);
 }
 
-.app-helmerts-internal-update-content-wait p {
+.app-helmerts-create_shipper-content-wait p {
     color: var(--color-p);
 }
 
-.app-helmerts-internal-update-content-error p {
+.app-helmerts-create_shipper-content-error p {
     color: var(--color-h);
 }
 
-.app-helmerts-internal-update-content-confirm-button {
+.app-helmerts-create_shipper-content-confirm-button {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -389,81 +373,66 @@
     align-items: center;
 }
 
-.app-helmerts-internal-update-content-confirm-button button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 3rem;
-    border-radius: 0.3rem;
-    border: none;
-    background-color: #444;
-    font-family: var(--font-family);
-    color: white;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-}
 
-.imge-style-update {
-    width: 100px;
+.imge-style {
+    width: 50px;
     height: auto;
     aspect-ratio: 1/1;
     object-fit: cover;
-    /* border-radius: 50%; */
+    border-radius: 50%;
     margin-left: 1rem;
 }
 
-@media screen and (max-width: 1200px) {
-    .app-helmerts-internal-update-content-attribute {
+@media screen and (max-width: 990px) {
+    .app-helmerts-create_shipper-content-attribute {
         display: flex;
         flex-direction: column;
     }
 
-    .app-helmerts-internal-update-heading h1 {
+    .app-helmerts-create_shipper-heading h1 {
         font-size: 24px;
     }
 
 }
 
 @media screen and (max-width: 600px) {
-    .app-helmerts-internal-update-content-attribute {
+    .app-helmerts-create_shipper-content-attribute {
         grid-gap: 2rem;
     }
 
-    .app-helmerts-internal-update-heading h1 {
+    .app-helmerts-create_shipper-heading h1 {
         font-size: 22px;
         text-align: center;
     }
 
-    .app-helmerts-internal-update-content-attribute-left-login_information,
-    .app-helmerts-internal-update-content-attribute-right-billing_information,
-    .app-helmerts-internal-update-content-attribute-left-personal_information {
+    .app-helmerts-create_shipper-content-attribute-left-login_information,
+    .app-helmerts-create_shipper-content-attribute-right-billing_information,
+    .app-helmerts-create_shipper-content-attribute-left-personal_information {
         grid-gap: 1rem;
     }
 
-    .app-helmerts-internal-update-content-attribute-right-billing_information-title h1,
-    .app-helmerts-internal-update-content-attribute-left-login_information-title h1,
-    .app-helmerts-internal-update-content-attribute-left-personal_information-title h1 {
+    .app-helmerts-create_shipper-content-attribute-right-billing_information-title h1,
+    .app-helmerts-create_shipper-content-attribute-left-login_information-title h1,
+    .app-helmerts-create_shipper-content-attribute-left-personal_information-title h1 {
         font-size: 17px;
     }
 
-    .app-helmerts-internal-update-content-attribute-left-login_information-content,
-    .app-helmerts-internal-update-content-attribute-right-billing_information-content,
-    .app-helmerts-internal-update-content-attribute-left-personal_information-content {
+    .app-helmerts-create_shipper-content-attribute-left-login_information-content,
+    .app-helmerts-create_shipper-content-attribute-right-billing_information-content,
+    .app-helmerts-create_shipper-content-attribute-left-personal_information-content {
         grid-gap: 1.5rem;
     }
 
-    .app-helmerts-internal-update-content-attribute-left-login_information-content-password-alert-list {
+    .app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-list {
         display: flex;
         flex-direction: column;
     }
 
-    .app-helmerts-internal-update-content-confirm-content-p p {
+    .app-helmerts-create_shipper-content-confirm-content-p p {
         font-size: 12px;
     }
 
-    .app-helmerts-internal-update-heading p {
+    .app-helmerts-create_shipper-heading p {
         font-size: 12px;
         text-align: center;
     }

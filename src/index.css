@@ -32,7 +32,10 @@
   --color-icon: rgb(96, 49, 34);
   --color-icon2: rgb(211, 238, 216);
   --color-icon3: rgb(141, 86, 59);
-
+  --color-red: rgb(245, 153, 153);
+  --color-blue: rgb(165, 230, 241);
+  --color-green: rgb(185, 238, 160);
+  --color-yellow: rgb(248, 230, 170);
   --liner-color: linear-gradient(90deg, rgba(160, 51, 19, 1) 0%, rgba(247, 210, 181, 1) 100%);
 }
 

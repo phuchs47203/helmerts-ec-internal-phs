@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Navbar.css'
 import { images } from '../../Constants'
-import { ManageOrder, Account } from '../../Containers'
+import { ManageOrder, Account, Login } from '../../Containers'
 import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import axios from 'axios';
@@ -32,12 +32,15 @@ const Navbar = () => {
     const [managerInforAccess, setmanagerInforAccess] = useState({});
     const [toggleAccount, settoggleAccount] = useState(false);
     const [PermitUsers, setPermitUsers] = useState(true);
+    const [localToken, setlocalToken] = useState(null);
+
     const Loggout = () => {
         try {
             const storedAccessToken = localStorage.getItem('accessToken');
             const parsedAccessToken = JSON.parse(storedAccessToken);
             setaccessTokenLogout(parsedAccessToken.token);
             // console.log("token:", parsedAccessToken.token);
+
             axios.post(URL_LOGOUT, null, {
                 headers: {
                     Accept: "application/json",
@@ -66,8 +69,9 @@ const Navbar = () => {
             const parsedAccessToken = JSON.parse(storedAccessToken);
             const expirationTime = new Date(parsedAccessToken.expiration_time);
             setmanagerInforAccess(parsedAccessToken.user);
+            setlocalToken(parsedAccessToken);
             // console.log(parsedAccessToken.user.role);
-            return Date.now() < expirationTime
+            return Date.now() < expirationTime.getTime()
                 && (parsedAccessToken.user.role !== 'user')
                 && (parsedAccessToken.user.role !== 'shipper');
         }
@@ -88,6 +92,14 @@ const Navbar = () => {
     const [toggleMenu, settoggleMenu] = useState(false);
     return (
         <div className='app-helmerts-navbar' id='navbar'>
+            {!PermitUsers &&
+                <div className='app-helmerts-home-error'>
+                    <h1 className='app-helmerts-home-error-fixed'>You do not have permission to access this page</h1>
+                    <div className='app-helmerts-home-error-login'>
+                        <Login />
+                    </div>
+                </div>
+            }
             <div className='app-helmerts-navbar-logo'>
                 <Link to="/home">
                     <img src={images.logo_helmerts} alt="Not support image" />
@@ -146,7 +158,9 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className='app-helmerts-navbar-content-personal_information-content'>
-                        <UpdatePersonalInformation User_Details={managerInforAccess} />
+                        <UpdatePersonalInformation
+                            User_Details={managerInforAccess}
+                            localToken={localToken} />
                     </div>
                 </div>
             }

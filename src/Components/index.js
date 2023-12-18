@@ -6,8 +6,8 @@ export { default as UpdatePersonalInformation } from './UpdatePersonalInformatio
 export { default as CreateProduct } from './CreateProduct/CreateProduct'
 export { default as ProductItem } from './ProductItem/ProductItem';
 export { default as UpdateProduct } from './UpdateProduct/UpdateProduct';
-
-
+export { default as Order } from './Order/Order';
+export { default as CreateShipper } from './CreateShipper/CreateShipper'
 
 
 

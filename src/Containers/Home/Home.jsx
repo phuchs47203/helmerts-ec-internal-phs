@@ -12,6 +12,8 @@ const Home = () => {
     const [waiting, setwaiting] = useState(false);
     const [userInfor, setuserInfor] = useState({});
     const [accessToken, setaccessToken] = useState(null);
+    const [localToken, setlocalToken] = useState(null);
+
     const isTokenValid = () => {
         const storedAccessToken = localStorage.getItem('accessToken');
         if (storedAccessToken) {
@@ -19,9 +21,12 @@ const Home = () => {
             const expirationTime = new Date(parsedAccessToken.expiration_time);
             setuserInfor(parsedAccessToken.user);
             setaccessToken(parsedAccessToken.token);
+            setlocalToken(parsedAccessToken);
             setwaiting(true);
             // console.log(parsedAccessToken.user.role);
-            return Date.now() < expirationTime
+            console.log("Minutes: ", (expirationTime.getTime() - Date.now()) / 60000);
+
+            return Date.now() < expirationTime.getTime()
                 && (parsedAccessToken.user.role !== 'user')
                 && (parsedAccessToken.user.role !== 'shipper');
         }
@@ -122,9 +127,8 @@ const Home = () => {
                             </div>
                         }
                         <div className='app-helmerts-home-main-content'>
-                            {listUsers.map((item, index) => (
-                                <UserItem User={item} key={item.id} />
-
+                            {localToken && listUsers.map((item, index) => (
+                                <UserItem User={item} key={item.id} localToken={localToken} />
                             ))
                             }
                         </div>

@@ -1,0 +1,70 @@
+.app-helmerts-confirm_order {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 25;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.app-helmerts-confirm_order-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* height: 100%; */
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--color-bg-box);
+    border-radius: 0.4rem;
+    grid-gap: 1rem;
+    max-width: 700px;
+}
+
+.app-helmerts-confirm_order-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-confirm_order-heading h1 {
+    text-align: center;
+    font-family: var(--font-family2);
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+    color: var(--color-h);
+}
+
+.app-helmerts-confirm_order-content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-confirm_order-content-input {
+    display: flex;
+    flex-direction: row;
+    max-width: 650px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.app-helmerts-confirm_order-content-btn {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 1rem;
+}

@@ -3,7 +3,7 @@ import './UserItem.css';
 import UpdateUser from '../UpdateUser/UpdateUser';
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
-const UserItem = ({ User }) => {
+const UserItem = ({ User, localToken }) => {
     const [toggleUpdate, settoggleUpdate] = useState(false);
     const handleUpdate = () => {
         settoggleUpdate(true);
@@ -17,7 +17,7 @@ const UserItem = ({ User }) => {
                             <img src={User.imgurl} alt="not support image" />
                         </div>
                         <div className='app-helmerts-internal-user_item-content-information'>
-                            <h3>{User.first_name}&nbsp;{User.last_name}</h3>
+                            <h3>{User.last_name}&nbsp;{User.first_name}</h3>
                             <p>{User.phone_number}</p>
                             <p>{User.email}</p>
                             <p>{User.country}</p>
@@ -41,7 +41,7 @@ const UserItem = ({ User }) => {
                         </div>
                     </div>
                     <div className='app-helmerts-internal-user_item-update-content'>
-                        <UpdateUser User_Details={User} />
+                        <UpdateUser User_Details={User} localToken={localToken} />
                     </div>
                 </div>
             }

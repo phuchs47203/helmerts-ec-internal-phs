@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import './UpdateUser.css'
+import React, { useEffect, useState } from 'react'
+import './CreateShipper.css'
 import { Link, json, useNavigate } from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -17,6 +17,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
+import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -30,8 +31,8 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
-const UpdateUser = ({ User_Details, localToken }) => {
-    const URL_REQUEST = "http://localhost:8000/api/users/" + User_Details.id;
+const CreateShipper = () => {
+    const URL_REQUEST = "http://localhost:8000/api/register-shipper";
     const defaultProps = {
         options: top7OptionTitle,
         getOptionLabel: (option) => option.name,
@@ -46,24 +47,34 @@ const UpdateUser = ({ User_Details, localToken }) => {
     const navigate = useNavigate();
     const [valueEmail, setValueEmail] = useState('');
     const [valuePassword, setValuePassword] = useState(null);
-    const [valueTitle, setValueTitle] = useState(User_Details.title);
-    const [valueCountry, setValueCountry] = useState(User_Details.country);
+    const [valueTitle, setValueTitle] = useState(null);
+    const [valueCountry, setValueCountry] = useState(null);
     const [firstName, setfirstName] = useState('');
     const [lastName, setlastName] = useState('');
     const [phoneNumber, setphoneNumber] = useState(null);
     const [fileURL, setfileURL] = useState("");
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [dateOfBirth, setdateOfBirth] = useState(null);
-    const [valueDate, setValueDate] = React.useState(dayjs(User_Details.dateofbirth));
+    const [valueDate, setValueDate] = React.useState(dayjs('2000-07-27'));
     // const [valueLocation, setValueLocation] = useState(null);
-    const [valueAddressDetails, setvalueAddressDetails] = useState(User_Details.address_details);
-    const [valueCity, setvalueCity] = useState(User_Details.city);
-    const [valueDistrict, setvalueDistrict] = useState(User_Details.district);
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // }, []);
+    const [valueAddressDetails, setvalueAddressDetails] = useState('');
+    const [valueCity, setvalueCity] = useState('');
+    const [valueDistrict, setvalueDistrict] = useState('');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const handleChangeEmail = (event) => {
         setValueEmail(event.target.value);
+    };
+    const handleChangePassword = (event) => {
+        setValuePassword(event.target.value);
+    }
+    const handleChangeFirstName = (event) => {
+        setfirstName(event.target.value);
+    };
+    const handleChangeLastName = (event) => {
+        setlastName(event.target.value);
     };
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -79,96 +90,134 @@ const UpdateUser = ({ User_Details, localToken }) => {
             }
         }
     }
+    const removeValueFields = () => {
+        setValueEmail('');
+        setValuePassword('');
+        setValueTitle(null);
+        setValueCountry(null);
+        setfirstName('');
+        setlastName('');
+        setfileURL('');
+        setphoneNumber(null);
+        setvalueAddressDetails('');
+        setvalueCity('');
+        setvalueDistrict('');
+        setValueDate(dayjs('2000-07-27'));
+    }
     const handleChangeAddress = (event) => {
         setvalueAddressDetails(event.target.value);
     };
-    const handleChangePassword = (event) => {
-        setValuePassword(event.target.value);
-    }
+
     const handleChangeCity = (event) => {
         setvalueCity(event.target.value);
     };
     const handleChangeDistrict = (event) => {
         setvalueDistrict(event.target.value);
     };
+    const handleChangeDateOfBirth = (event) => {
+        setdateOfBirth(event.target.value);
+    };
+    const handleChangePhoneNumber = (event) => {
+        setphoneNumber(event.target.value);
+    };
     const [errorEmail, seterrorEmail] = useState('');
     const [registerSuccess, setregisterSuccess] = useState('');
     const [pleaseWait, setpleaseWait] = useState('');
+    const [accessTokenLogout, setaccessTokenLogout] = useState(null);
 
     const saveUser = () => {
-        const formData = new FormData();
-        setpleaseWait('Please Wait ...!');
-        seterrorEmail('');
-        // const formattedDate = dayjs(valueDate).format('YYYY-MM-DD');
-        // // console.log(formattedDate);
-
-        formData.append('title', valueTitle);
-        formData.append('country', valueCountry);
-        formData.append('city', valueCity);
-        formData.append('district', valueDistrict);
-        formData.append('address_details', valueAddressDetails);
-        if (selectedFile) {
-            formData.append('imgurl', selectedFile);
-        }
-        if (valuePassword) {
-            formData.append('password', valuePassword);
-            formData.append('password_confirmation', valuePassword);
-        }
-        // for (const [key, value] of formData.entries()) {
-        //     console.log(key, value);
-        // }
-
-        axios
-            .post(URL_REQUEST, formData,
-                {
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: `Bearer ${localToken.token}`
-                    }
-                })
-            .then((response) => {
-                console.log(response.data);
-                setregisterSuccess('Update Successfully!');
-                setpleaseWait('');
+        const fetchData = async () => {
+            try {
+                const formData = new FormData();
+                const storedAccessToken = localStorage.getItem('accessToken');
+                const parsedAccessToken = JSON.parse(storedAccessToken);
+                setpleaseWait('Please Wait ...!');
                 seterrorEmail('');
-            })
-            .catch((error) => {
-                console.log(error);
-                seterrorEmail('The Email Address Already Been Taken!');
                 setregisterSuccess('');
+                const formattedDate = dayjs(valueDate).format('YYYY-MM-DD');
 
-            });
+                formData.append('first_name', firstName);
+                formData.append('last_name', lastName);
+                formData.append('email', valueEmail);
+                formData.append('password', valuePassword);
+                formData.append('phone_number', phoneNumber);
+                formData.append('country', valueCountry.country);
+                formData.append('city', valueCity);
+                formData.append('district', valueDistrict);
+                formData.append('address_details', valueAddressDetails);
+                formData.append('imgurl', selectedFile);
+                formData.append('dateofbirth', formattedDate);
+                formData.append('password_confirmation', valuePassword);
+                formData.append('title', valueTitle.name);
+
+                // for (const [key, value] of formData.entries()) {
+                //     console.log(key, value);
+                // }
+                // console.log(URL_REQUEST);
+                // console.log(parsedAccessToken.token);
+                // return;
+                const createResponse = axios.post(URL_REQUEST, formData,
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            Authorization: `Bearer ${parsedAccessToken.token}`
+                        }
+                    });
+                console.log(createResponse.data);
+                setTimeout(() => {
+                    setregisterSuccess('Register Successfully!');
+                    setpleaseWait('');
+                    removeValueFields();
+                }, 2500);
+            } catch (error) {
+                seterrorEmail('The Email Address Already Been Taken!');
+                setpleaseWait('');
+                console.log(error);
+            };
+        };
+        fetchData();
+
     };
     useEffect(() => {
         seterrorEmail('');
         setpleaseWait('');
-
     }, [registerSuccess]);
     useEffect(() => {
         setpleaseWait('');
     }, [errorEmail]);
+    const handleChangeBack = () => {
+        navigate('/shipper');
+    }
     return (
-        <div id='update-user' className='app-helmerts-update-box'>
-            <div className='app-helmerts-update '>
-                <div className='app-helmerts-update-heading'>
-                    <h1>Update Information</h1>
+        <div id='create-shipper' className='app-helmerts-create_shipper-box'>
+            <div className='app-helmerts-create_protuct-box-back'>
+                <div
+                    onClick={handleChangeBack}
+                    className='app-helmerts-create_protuct-back'>
+                    <HiOutlineArrowNarrowLeft className='svg_back' />
+                    <p className='back_'>Back</p>
+                </div>
+            </div>
+            <div className='app-helmerts-create_shipper'>
+                <div className='app-helmerts-create_shipper-heading'>
+                    <h1>Create an shipper</h1>
                     <p>
-                        As an administrator, you may only edit certain user information, you agree to accept the&nbsp;
+                        By creating an account, you agree to accept the&nbsp;
                         <Link to="/information" className='link_'>
                             General Terms and Conditions
                         </Link>
-                        &nbsp;of Use and that your changes will be processed in compliance with the&nbsp;
+                        &nbsp;of Use and that your data will be processed in compliance with the&nbsp;
                         <Link to="/information" className='link_'>
                             Privacy Policy
                         </Link>
                         &nbsp;of Helmerts.
                     </p>
                 </div>
-                <div className='app-helmerts-update-content'>
-                    <div className='app-helmerts-update-content-attribute'>
-                        <div className='app-helmerts-update-content-attribute-left'>
-                            <div className='app-helmerts-update-content-attribute-left-login_information'>
-                                <div className='app-helmerts-update-content-attribute-left-login_information-title'>
+                <div className='app-helmerts-create_shipper-content'>
+                    <div className='app-helmerts-create_shipper-content-attribute'>
+                        <div className='app-helmerts-create_shipper-content-attribute-left'>
+                            <div className='app-helmerts-create_shipper-content-attribute-left-login_information'>
+                                <div className='app-helmerts-create_shipper-content-attribute-left-login_information-title'>
                                     <h1>
                                         LOGIN INFORMATION
                                     </h1>
@@ -176,40 +225,64 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                         * Required information
                                     </p>
                                 </div>
-                                <div className='app-helmerts-update-content-attribute-left-login_information-content'>
-                                    <div className='app-helmerts-update-content-attribute-left-login_information-content-email'>
-                                        <div className='app-helmerts-update-content-attribute-left-login_information-content-email-input'>
+                                <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-email'>
+                                        <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-email-input'>
 
                                             <TextField
                                                 required
                                                 id="email"
                                                 label="E-mail"
-                                                value={User_Details.email}
+                                                // variant="outlined"
+                                                value={valueEmail}
+                                                onChange={handleChangeEmail}
                                                 type='email'
-
-                                                style={commonTextFieldStyle}
+                                                // autoComplete="current-email"
+                                                // className='custom-textfield-input'
+                                                autoComplete="on"
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    width: '100%',
+                                                    borderRadius: 'none',
+                                                    border: '0px solid var(--color-p)',
+                                                    outline: 'none',
+                                                    background: 'transparent',
+                                                }}
                                                 InputLabelProps={{
-                                                    classes: commonInputLabelStyle,
+                                                    classes: {
+                                                        root: 'custom-input-label'
+                                                    }
                                                 }}
                                                 InputProps={{
-                                                    style: commonInputPropsStyle,
-                                                    classes: commonInputClasses,
-                                                }}
-                                                disabled
-                                            />
+                                                    style: {
+                                                        color: 'var(--color-p)',
+                                                        backgroundColor: 'transparent',
+                                                        borderRadius: '0rem',
+                                                        border: '0rem solid white',
+                                                        outline: 'none',
+                                                        fontSize: '13px',
+                                                        background: 'transparent',
+                                                        width: '100%',
+                                                    },
+                                                    classes: {
+                                                        root: 'custom-input-root',
+                                                        notchedOutline: 'custom-notched-outline',
+                                                        focused: 'custom-focused'
+                                                    }
+                                                }} />
 
                                         </div>
                                     </div>
-                                    <div className='app-helmerts-update-content-attribute-left-login_information-content-password'>
-                                        <div className='app-helmerts-update-content-attribute-left-login_information-content-password-input'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-password'>
+                                        <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-password-input'>
                                             <TextField
                                                 required
                                                 id="outlined-password-input"
-                                                label="New Password"
+                                                label="Password"
                                                 type="password"
                                                 autoComplete="current-password"
-                                                onChange={handleChangePassword}
                                                 value={valuePassword}
+                                                onChange={handleChangePassword}
                                                 style={commonTextFieldStyle}
                                                 InputLabelProps={{
                                                     classes: commonInputLabelStyle,
@@ -220,25 +293,49 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                 }}
 
                                             />
+                                        </div>
+                                        <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert'>
+                                            <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-title'>
+                                                <p>
+                                                    For your security, we invite you to fill your password according to the following criteria:
+                                                </p>
+                                            </div>
+                                            <div className='app-helmerts-create_shipper-content-attribute-left-login_information-content-password-alert-list'>
+                                                <p>
+                                                    At least 10 characters
+                                                </p>
+                                                <p>
+                                                    At least 1 uppercase letter
+                                                </p>
+                                                <p>
+                                                    At least 1 lowercase letter
+                                                </p>
+                                                <p>
+                                                    At least 1 number
+                                                </p>
+                                                <p>
+                                                    At least 1 special character
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className='app-helmerts-update-content-attribute-left-personal_information'>
-                                <div className='app-helmerts-update-content-attribute-left-personal_information-title'>
+                            <div className='app-helmerts-create_shipper-content-attribute-left-personal_information'>
+                                <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-title'>
                                     <h1>
                                         PERSONAL INFORMATION
                                     </h1>
                                 </div>
-                                <div className='app-helmerts-update-content-attribute-left-personal_information-content'>
-                                    <div className='app-helmerts-update-content-attribute-left-personal_information-content-item'>
+                                <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
                                         <Autocomplete
                                             {...defaultProps}
                                             id="disable-clearable"
                                             disableClearable
-                                            value={{ name: valueTitle }}
+                                            value={valueTitle}
                                             onChange={(event, newValue) => {
-                                                setValueTitle(newValue ? newValue.name : User_Details.title);
+                                                setValueTitle(newValue);
                                             }}
                                             style={commonTextFieldStyle}
                                             InputLabelProps={{
@@ -258,14 +355,17 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                             )}
                                         />
                                     </div>
-                                    <div className='app-helmerts-update-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
                                         <TextField
                                             required
                                             id="name"
                                             label="First name "
                                             variant="outlined"
-                                            value={User_Details.first_name}
+                                            value={firstName}
+                                            onChange={handleChangeFirstName}
                                             type='text'
+                                            // autoComplete="current-name"
+                                            autoComplete="on"
                                             style={commonTextFieldStyle}
                                             InputLabelProps={{
                                                 classes: commonInputLabelStyle,
@@ -274,19 +374,20 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                 style: commonInputPropsStyle,
                                                 classes: commonInputClasses,
                                             }}
-                                            disabled
                                         />
 
                                     </div>
-                                    <div className='app-helmerts-update-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
 
                                         <TextField
                                             required
                                             id="name"
                                             label="Last name "
                                             variant="outlined"
-                                            value={User_Details.last_name}
+                                            value={lastName}
+                                            onChange={handleChangeLastName}
                                             type='text'
+                                            autoComplete="on"
                                             style={commonTextFieldStyle}
                                             InputLabelProps={{
                                                 classes: commonInputLabelStyle,
@@ -295,10 +396,9 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                 style: commonInputPropsStyle,
                                                 classes: commonInputClasses,
                                             }}
-                                            disabled
                                         />
                                     </div>
-                                    <div className='app-helmerts-update-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
                                         <Button component="label"
                                             variant="contained"
 
@@ -315,19 +415,20 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                             <VisuallyHiddenInput
                                                 type="file"
                                                 onChange={handleFileChange}
+                                            //  accept='image/*'
                                             />
                                         </Button>
-                                        {fileURL || (
-                                            <img src={User_Details.imgurl} className='imge-style' alt="no image" />
+                                        {fileURL && (
+                                            <img src={fileURL} className='imge-style' alt="no image" />
                                         )
 
                                         }
 
                                     </div>
-                                    <div className='app-helmerts-update-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
                                         <PhoneInput
                                             className="phone_style"
-                                            value={User_Details.phone_number}
+                                            value={phoneNumber}
                                             onChange={(newValue) => setphoneNumber(newValue)}
                                             inputStyle={{
                                                 width: '100%', // Thiết lập chiều dài của phần nhập số điện thoại là 100%
@@ -338,6 +439,7 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                 name: 'phone',
                                                 required: true,
                                                 autoFocus: true,
+
                                             }}
                                             style={commonTextFieldStyle}
                                             InputLabelProps={{
@@ -347,10 +449,9 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                 style: commonInputPropsStyle,
                                                 classes: commonInputClasses,
                                             }}
-                                            disabled
                                         />
                                     </div>
-                                    <div className='app-helmerts-update-content-attribute-left-personal_information-content-item'>
+                                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                             <DemoContainer
                                                 components={['DatePicker', 'DatePicker']}>
@@ -358,33 +459,32 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                     label="Date of birth"
                                                     value={valueDate}
                                                     onChange={(newValue) => setValueDate(newValue)}
-                                                    disabled
                                                 />
                                             </DemoContainer>
                                         </LocalizationProvider>
                                     </div>
-                                    {/* <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
-                  </div>
-                  <div className='app-helmerts-signup-content-attribute-left-personal_information-content-item'>
-                  </div> */}
+                                    {/* <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
+                    </div>
+                    <div className='app-helmerts-create_shipper-content-attribute-left-personal_information-content-item'>
+                    </div> */}
                                 </div>
                             </div>
                         </div>
-                        <div className='app-helmerts-update-content-attribute-right-billing_information'>
-                            <div className='app-helmerts-update-content-attribute-right-billing_information-title'>
+                        <div className='app-helmerts-create_shipper-content-attribute-right-billing_information'>
+                            <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-title'>
                                 <h1>
                                     BILLING INFORMATION
                                 </h1>
                             </div>
-                            <div className='app-helmerts-update-content-attribute-right-billing_information-content'>
-                                <div className='app-helmerts-update-content-attribute-right-billing_information-content-item'>
+                            <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-content'>
+                                <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-content-item'>
                                     <Autocomplete
                                         {...defaultPropsCountry}
                                         id="disable-clearable"
                                         disableClearable
-                                        value={{ country: valueCountry }}
+                                        value={valueCountry}
                                         onChange={(event, newValue) => {
-                                            setValueCountry(newValue ? newValue.country : User_Details.country);
+                                            setValueCountry(newValue);
                                         }}
                                         style={commonTextFieldStyle}
                                         InputLabelProps={{
@@ -397,11 +497,10 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                         renderInput={(params) => (
                                             <TextField {...params} required label="Location" variant="standard" />
                                         )}
-
                                     />
                                 </div>
 
-                                <div className='app-helmerts-update-content-attribute-right-billing_information-content-item'>
+                                <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-content-item'>
                                     <TextField
                                         required
                                         id="city"
@@ -422,7 +521,7 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                         }}
                                     />
                                 </div>
-                                <div className='app-helmerts-update-content-attribute-right-billing_information-content-item'>
+                                <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-content-item'>
                                     <TextField
                                         required
                                         id="district"
@@ -443,7 +542,7 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                         }}
                                     />
                                 </div>
-                                <div className='app-helmerts-update-content-attribute-right-billing_information-content-item'>
+                                <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-content-item'>
                                     <TextField
                                         required
                                         id="address"
@@ -464,51 +563,51 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                         }}
                                     />
                                 </div>
-                                {/* <div className='app-helmerts-signup-content-attribute-right-billing_information-content-item'>
-                </div> */}
+                                {/* <div className='app-helmerts-create_shipper-content-attribute-right-billing_information-content-item'>
+                  </div> */}
                             </div>
                         </div>
                     </div>
-                    <div className='app-helmerts-update-content-confirm'>
+                    <div className='app-helmerts-create_shipper-content-confirm'>
                         <div className='line_' />
-                        <div className='app-helmerts-update-content-confirm-content'>
-                            <div className='app-helmerts-update-content-confirm-content-svg'>
+                        <div className='app-helmerts-create_shipper-content-confirm-content'>
+                            <div className='app-helmerts-create_shipper-content-confirm-content-svg'>
                                 <FormControlLabel control={<Checkbox />} />
                             </div>
-                            <div className='app-helmerts-update-content-confirm-content-p'>
+                            <div className='app-helmerts-create_shipper-content-confirm-content-p'>
                                 <p>
-                                    I guarantee compliance with
+                                    I agree to receive information by email about offers, services, products and events from Hermes or other group companies, in accordance with
                                     the&nbsp;<Link to='/information' className='link_'>Privacy Policy</Link>
-                                    &nbsp; of Helmerts
+                                    .
                                 </p>
                             </div>
                         </div>
                         {pleaseWait &&
-                            <div className='app-helmerts-update-content-wait'>
+                            <div className='app-helmerts-create_shipper-content-wait'>
                                 <p>
                                     {pleaseWait}
                                 </p>
                             </div>
                         }
                         {errorEmail &&
-                            <div className='app-helmerts-update-content-error'>
+                            <div className='app-helmerts-create_shipper-content-error'>
                                 <p>
                                     {errorEmail}
                                 </p>
                             </div>
                         }
                         {registerSuccess &&
-                            <div className='app-helmerts-update-content-success'>
+                            <div className='app-helmerts-create_shipper-content-success'>
                                 <p>
                                     {registerSuccess}
                                 </p>
                             </div>
                         }
-                        <div className='app-helmerts-update-content-confirm-button'>
+                        <div className='app-helmerts-create_shipper-content-confirm-button'>
                             <button
-                                className='btn-transition'
+                                className='btn-transition button_default'
                                 onClick={saveUser}
-                            >Confirm</button>
+                            >Register shipper</button>
                         </div>
                     </div>
                 </div>
@@ -588,4 +687,5 @@ const commonInputClasses = {
     notchedOutline: 'custom-notched-outline',
     focused: 'custom-focused',
 };
-export default UpdateUser
+
+export default CreateShipper

@@ -185,6 +185,7 @@ const CreateProduct = () => {
         formData.append('imgurl', selectedFile);
         formData.append('create_by', userInfor.id);
         formData.append('update_by', userInfor.id);
+        formData.append('design_by',DesignBy);
 
         axios
             .post(URL_REQUEST, formData,

@@ -3,7 +3,7 @@ import React, { useState, useEffect, } from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, Login, ManageOrder, ManageShipper, ManageUser, Account, ManageProduct } from './Containers'
-import { CreateProduct, Navbar, UpdateUser } from './Components'
+import { CreateProduct, CreateShipper, Navbar, UpdateUser } from './Components'
 
 function App() {
   const [permitUser, setPermitUser] = useState(false);
@@ -54,6 +54,7 @@ function PrivateRoutes() {
           <Route path="/product" element={<ManageProduct />} />
           <Route path="/update-user" element={<UpdateUser />} />
           <Route path="/create-product" element={<CreateProduct />} />
+          <Route path='/create-shipper' element={<CreateShipper />} />
         </Routes>
       </div>
     </>

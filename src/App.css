@@ -295,21 +295,39 @@ p {
   text-decoration: none;
   cursor: pointer;
   color: white;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1rem;
   border-radius: 0.2rem;
   border: none;
-  background-color: #444;
   text-decoration: none;
   white-space: nowrap;
-
+  background-color: #444;
 }
 
 .button_default:hover {
   background-color: #505050;
   color: var(--color-h);
   font-weight: 500;
+}
+
+.button_confirm {
+  font-family: var(--font-family);
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 0.4rem 1rem;
+  border-radius: 0.2rem;
+  border: none;
+  background-color: #2f5836;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.button_confirm:hover {
+  color: var(--color-h);
 }
 
 .button_update {
@@ -357,6 +375,15 @@ p {
 
 .helmerst-app-navbar {
   /* padding: 1rem 10rem; */
+}
+
+.helmerst-app-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 1350px) {

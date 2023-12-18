@@ -1,0 +1,56 @@
+.app-helmerts-list_order {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    grid-gap: 0.3rem;
+    max-width: 1400px;
+    background-color: var(--color-bg);
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-list_order-filter {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    justify-content: space-between;
+    grid-gap: 1rem;
+    max-width: 1500px;
+    background-color: var(--color-bg-box);
+}
+
+.app-helmerts-list_order-filter-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-list_order-filter-item button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-p);
+}
+
+.app-helmerts-list_order-filter-item button:hover {
+    color: var(--color-h);
+}
+
+.app-helmerts-list_order-filter-item button:focus {
+    color: var(--color-h);
+}
+
+.app-helmerts-list_order-content {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0.5rem;
+}
+
+.app-helmerts-list_order-content-item {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 1rem;
+}

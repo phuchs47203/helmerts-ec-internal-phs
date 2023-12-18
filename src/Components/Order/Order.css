@@ -1,0 +1,120 @@
+.app-helmerts-order {
+    background-color: var(--color-bg-box);
+    display: flex;
+    flex-direction: column;
+    grid-gap: 0.5rem;
+    width: 100%;
+}
+
+.app-helmerts-order-heading {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    grid-gap: 0.5rem;
+    padding: 1rem;
+}
+
+.app-helmerts-order-heading-status,
+.app-helmerts-order-heading-payment_status {
+    border: 0.1px solid var(--color-icon);
+    border-radius: 0.3rem;
+    padding: 0.4rem 1.3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-helmerts-order-heading-status h1,
+.app-helmerts-order-heading-payment_status h1 {
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 500;
+    color: #474747;
+    text-transform: capitalize;
+}
+
+.app-helmerts-order-heading-status.pending {
+    background-color: var(--color-yellow);
+}
+
+.app-helmerts-order-heading-status.shipped {
+    background-color: var(--color-blue);
+}
+
+.app-helmerts-order-heading-status.completed {
+    background-color: var(--color-green);
+}
+
+.app-helmerts-order-heading-status.canceled {
+    background-color: var(--color-red);
+}
+
+.app-helmerts-order-heading-payment_status.not_paid {
+    background-color: var(--color-red);
+}
+
+.app-helmerts-order-heading-payment_status.in_payment {
+    background-color: var(--color-yellow);
+}
+
+.app-helmerts-order-heading-payment_status.paid {
+    background-color: var(--color-green);
+}
+
+
+.app-helmerts-order-payment_review {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    grid-gap: 0.5rem;
+}
+
+.app-helmerts-order-payment_review-address {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    grid-gap: 0.5rem;
+}
+
+.app-helmerts-order-payment_review-address h1 {
+    font-family: var(--font-family3);
+    font-size: 13px;
+    font-weight: 400;
+    color: #444;
+}
+
+.app-helmerts-order-payment_review-total_payment {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.app-helmerts-order-payment_review-total_payment h1 {
+    font-family: var(--font-family3);
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+}
+
+.app-helmerts-order-payment_review-review {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    grid-gap: 1rem;
+}
+
+.app-helmerts-order-payment_review-review button {}
+
+@media screen and (max-width: 800px) {
+    .app-helmerts-order-payment_review-total_payment h1 {
+        font-size: 14px;
+    }
+}

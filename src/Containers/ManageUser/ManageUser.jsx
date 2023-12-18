@@ -11,11 +11,14 @@ const ManageUser = () => {
     const [accessToken, setaccessToken] = useState(null);
     const [expire_at, setexpire_at] = useState(null);
     const [waiting, setwaiting] = useState(false);
+    const [localToken, setlocalToken] = useState(null);
+
     const isTokenValid = () => {
         const storedAccessToken = localStorage.getItem('accessToken');
         if (storedAccessToken) {
             const parsedAccessToken = JSON.parse(storedAccessToken);
             const expirationTime = new Date(parsedAccessToken.expiration_time);
+            setlocalToken(parsedAccessToken);
             setuserInfor(parsedAccessToken.user);
             setaccessToken(parsedAccessToken.token);
             setwaiting(true);
@@ -90,7 +93,7 @@ const ManageUser = () => {
                         }
                         <div className='app-helmerts-home-main-content'>
                             {listUsers.map((item, index) => (
-                                <UserItem User={item} key={item.id} />
+                                <UserItem User={item} key={item.id} localToken={localToken} />
 
                             ))
                             }

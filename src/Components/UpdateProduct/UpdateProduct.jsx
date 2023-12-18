@@ -71,9 +71,9 @@ const UpdateProduct = ({ Product }) => {
 
     const [imgChange, setimgChange] = useState(false);
     const [listSize, setlistSize] = useState([]);
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
