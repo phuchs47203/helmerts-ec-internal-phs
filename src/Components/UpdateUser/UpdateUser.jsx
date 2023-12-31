@@ -51,7 +51,7 @@ const UpdateUser = ({ User_Details, localToken }) => {
     const [firstName, setfirstName] = useState('');
     const [lastName, setlastName] = useState('');
     const [phoneNumber, setphoneNumber] = useState(null);
-    const [fileURL, setfileURL] = useState("");
+    const [fileURL, setfileURL] = useState(User_Details.imgurl);
     const [selectedFile, setSelectedFile] = React.useState(null);
     const [dateOfBirth, setdateOfBirth] = useState(null);
     const [valueDate, setValueDate] = React.useState(dayjs(User_Details.dateofbirth));
@@ -317,8 +317,8 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                                 onChange={handleFileChange}
                                             />
                                         </Button>
-                                        {fileURL || (
-                                            <img src={User_Details.imgurl} className='imge-style' alt="no image" />
+                                        {fileURL && (
+                                            <img src={fileURL} className='imge-style-update' alt="no image" />
                                         )
 
                                         }
@@ -471,7 +471,7 @@ const UpdateUser = ({ User_Details, localToken }) => {
                     </div>
                     <div className='app-helmerts-update-content-confirm'>
                         <div className='line_' />
-                        <div className='app-helmerts-update-content-confirm-content'>
+                        {/* <div className='app-helmerts-update-content-confirm-content'>
                             <div className='app-helmerts-update-content-confirm-content-svg'>
                                 <FormControlLabel control={<Checkbox />} />
                             </div>
@@ -482,7 +482,7 @@ const UpdateUser = ({ User_Details, localToken }) => {
                                     &nbsp; of Helmerts
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                         {pleaseWait &&
                             <div className='app-helmerts-update-content-wait'>
                                 <p>

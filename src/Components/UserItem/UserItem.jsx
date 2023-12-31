@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import './UserItem.css';
 import UpdateUser from '../UpdateUser/UpdateUser';
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 
 const UserItem = ({ User, localToken }) => {
     const [toggleUpdate, settoggleUpdate] = useState(false);
     const handleUpdate = () => {
         settoggleUpdate(true);
     }
+    const [toggleDelete, settoggleDelete] = useState(false);
+    const URL_DELETE = "http://localhost:8000/api/users/" + User.id;
+
     return (
         <div className='app-helmerts-internal-user_item-box scale-in'>
             {
@@ -25,9 +29,12 @@ const UserItem = ({ User, localToken }) => {
                     </div>
                     <div className='app-helmerts-internal-user_item-button'>
                         <button className='btn-transition button_update' onClick={() => settoggleUpdate(true)}>Update</button>
-                        <button className='btn-transition button_delete'>Delete</button>
+                        <button className='btn-transition button_delete' onClick={() => settoggleDelete(true)}>Delete</button>
                     </div>
                 </div>
+            }
+            {toggleDelete &&
+                <ConfirmDelete settoggleDelete={settoggleDelete} localToken={localToken} linkURLReqeust={URL_DELETE} />
             }
             {toggleUpdate &&
                 <div className='app-helmerts-internal-user_item-update fall-in-down'>

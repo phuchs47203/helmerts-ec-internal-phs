@@ -2,14 +2,42 @@ import React, { useState, useEffect } from 'react'
 import './ProductItem.css'
 import UpdateProduct from '../UpdateProduct/UpdateProduct';
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import axios from 'axios';
+import ConfirmDelete from '../ConfirmDelete/ConfirmDelete';
 
-const ProductItem = ({ Product }) => {
+const ProductItem = ({ Product, localToken }) => {
     const [toggleUpdate, settoggleUpdate] = useState(false);
     const handleUpdate = () => {
         settoggleUpdate(true);
     }
+    const URL_REQUEST_PRODUCT = "http://localhost:8000/api/products/" + Product.id;
+    const URL_DELETE = "http://localhost:8000/api/products/" + Product.id;
+    const handleDelete = () => {
+        // try {
+        //     axios.delete(URL_REQUEST_PRODUCT, {
+        //         headers: {
+        //             Accept: "application/json",
+        //             Authorization: `Bearer ${localToken.token}`
+        //         }
+        //     })
+        //         .then(response => {
+        //             console.log(response);
+        //             window.location.reload();
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         });
+
+        // } catch (err) {
+        //     console.log(err);
+        // }
+    }
+    const [toggleDelete, settoggleDelete] = useState(false);
     return (
         <div className='app-helmerts-internal-product_item-box scale-in'>
+            {toggleDelete &&
+                <ConfirmDelete settoggleDelete={settoggleDelete} localToken={localToken} linkURLReqeust={URL_DELETE} />
+            }
             {
                 <div className='app-helmerts-internal-product_item'>
                     <div className='app-helmerts-internal-product_item-content'>
@@ -25,7 +53,7 @@ const ProductItem = ({ Product }) => {
                     </div>
                     <div className='app-helmerts-internal-product_item-button'>
                         <button className='btn-transition button_update' onClick={() => settoggleUpdate(true)}>Update</button>
-                        <button className='btn-transition button_delete'>Delete</button>
+                        <button className='btn-transition button_delete' onClick={() => settoggleDelete(true)}>Delete</button>
                     </div>
                 </div>
             }

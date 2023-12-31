@@ -570,7 +570,7 @@ const CreateShipper = () => {
                     </div>
                     <div className='app-helmerts-create_shipper-content-confirm'>
                         <div className='line_' />
-                        <div className='app-helmerts-create_shipper-content-confirm-content'>
+                        {/* <div className='app-helmerts-create_shipper-content-confirm-content'>
                             <div className='app-helmerts-create_shipper-content-confirm-content-svg'>
                                 <FormControlLabel control={<Checkbox />} />
                             </div>
@@ -581,7 +581,7 @@ const CreateShipper = () => {
                                     .
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                         {pleaseWait &&
                             <div className='app-helmerts-create_shipper-content-wait'>
                                 <p>

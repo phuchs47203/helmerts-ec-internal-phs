@@ -19,6 +19,7 @@ import Checkbox from '@mui/material/Checkbox';
 import axios from 'axios';
 import { Description } from '@mui/icons-material';
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
+import fileType from 'file-type';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -68,21 +69,54 @@ const CreateProduct = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        setSelectedFile(file);
-        if (file) {
-            // console.log("has file");
+    // const handleFileChange = (event) => {
+    //     const file = event.target.files[0];
+    //     const reader = new FileReader();
+    //     setSelectedFile(file);
+    //     if (file) {
+    //         // console.log("has file");
 
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                setfileURL(reader.result);
-                // console.log(selectedFile);
+    //         reader.readAsDataURL(file);
+    //         reader.onload = () => {
+    //             setfileURL(reader.result);
+    //             // console.log(selectedFile);
+    //         }
+    //     }
+    // }
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+
+        if (file) {
+            const buffer = await readFileAsBuffer(file);
+
+            // Sử dụng thư viện file-type để xác định loại tệp tin
+            const fileInfo = fileType(buffer);
+
+            if (fileInfo && fileInfo.mime.startsWith('image')) {
+                // Đây là một tệp hình ảnh
+                reader.readAsDataURL(file);
+                reader.onload = () => {
+                    setfileURL(reader.result);
+                }
+            } else {
+                // Không phải là một tệp hình ảnh
+                seterrorFileImage('File is not an IMAGE');
             }
         }
-    }
+    };
 
+    const readFileAsBuffer = (file) => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const buffer = event.target.result;
+                resolve(buffer);
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    };
 
     const [errorEmail, seterrorEmail] = useState('');
     const [registerSuccess, setregisterSuccess] = useState('');
@@ -142,7 +176,7 @@ const CreateProduct = () => {
             setPermitUsers(false);
         }
     }, []);
-
+    const [errorFileImage, seterrorFileImage] = useState('');
     const saveProduct = () => {
         // console.log("GENERAL information");
         // console.log(productName);
@@ -182,10 +216,13 @@ const CreateProduct = () => {
         formData.append('available', available);
         formData.append('sold', sold);
         formData.append('cat_id', productCategory.cat_id);
-        formData.append('imgurl', selectedFile);
+
+        if (selectedFile)
+
+            formData.append('imgurl', selectedFile);
         formData.append('create_by', userInfor.id);
         formData.append('update_by', userInfor.id);
-        formData.append('design_by',DesignBy);
+        formData.append('design_by', DesignBy);
 
         axios
             .post(URL_REQUEST, formData,
@@ -432,9 +469,12 @@ const CreateProduct = () => {
                                             />
                                         </Button>
                                         {fileURL && (
-                                            <img src={fileURL} className='image-style' alt="no image" />
+                                            <img src={fileURL} className='image-style' alt={errorFileImage} />
                                         )
+                                        }
 
+                                        {errorFileImage &&
+                                            <p>{errorFileImage}</p>
                                         }
 
                                     </div>
@@ -544,7 +584,7 @@ const CreateProduct = () => {
                     </div>
                     <div className='app-helmerts-create_protuct-content-confirm'>
                         <div className='line_' />
-                        <div className='app-helmerts-create_protuct-content-confirm-content'>
+                        {/* <div className='app-helmerts-create_protuct-content-confirm-content'>
                             <div className='app-helmerts-create_protuct-content-confirm-content-svg'>
                                 <FormControlLabel control={<Checkbox />} />
                             </div>
@@ -555,7 +595,7 @@ const CreateProduct = () => {
                                     .
                                 </p>
                             </div>
-                        </div>
+                        </div> */}
                         {pleaseWait &&
                             <div className='app-helmerts-create_protuct-content-wait'>
                                 <p>

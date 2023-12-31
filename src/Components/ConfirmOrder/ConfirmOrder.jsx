@@ -47,6 +47,7 @@ const ConfirmOrder = ({ Order, localToken, settoggleConfim, topOptionShipper }) 
 
                 setTimeout(() => {
                     settoggleConfim(false);
+                    window.location.reload();
                 }, 1000);
             } catch (error) {
                 console.log(error);

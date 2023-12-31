@@ -30,7 +30,7 @@ const ManageProduct = () => {
         }
         return false;
     }
-    const URL_REQUEST_PRODUCT = "http://localhost:8000/api/products";
+    const URL_REQUEST_PRODUCT = "http://localhost:8000/api/products-newest";
     useEffect(() => {
         // console.log(accessToken);
         try {
@@ -96,7 +96,7 @@ const ManageProduct = () => {
                         }
                         <div className='app-helmerts-product-main-content'>
                             {listProduct.map((item, index) => (
-                                <ProductItem Product={item} key={item.id} />
+                                <ProductItem Product={item} localToken={localToken} key={item.id} />
                             ))
                             }
                         </div>
